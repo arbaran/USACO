@@ -1,0 +1,2 @@
+N = ()
+bead_string = []
