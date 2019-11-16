@@ -1,3 +1,9 @@
+'''
+ID: arcaand2
+LANG: PYTHON3
+TASK: beads
+'''
+
 #open file, put string into list 
 
 with open('beads.in', 'r') as fin:
@@ -6,53 +12,35 @@ with open('beads.in', 'r') as fin:
 
 flatnecklace = necklace * 2 
 
-print(flatnecklace)
+#print(flatnecklace)
 
 maxResult = 0
 
-for i in flatnecklace: 
-    Wcounter = 0
-    Rcounter = 0
-    Bcounter = 0
-    firstNonWhiteBead = False
-    SecondColor = False
-    result = 0 
-    if i == 'w': 
-        Wcounter += 1
-        continue
-        firstNonWhiteBead = True 
-        if i == 'r':
-            Rcounter += 1
-            while i == 'r':
-                Rcounter+= 1 
-        else: 
-            SecondColor = True
-            while SecondColor == True:
-                result = Rcounter + Wcounter
-    else: 
-        Bcounter += 1 
-        if i == 'b' : 
-            while i == 'b':
-                Bcounter+= 1 
-        else: 
-            SecondColor = True
-            while SecondColor == True:
-                result = Bcounter + Wcounter
-             
-
-        
-result = int(Rcounter + Bcounter)
-
-maxresult = max(maxresult, result)
-
-print(result)
-
-#while loop of W... add to W counter
-# once nonWletter is found... add to the r/b counter
-# once secondcolor found... break. add w counter + r/b counter to get total number of that color.  
-
-
-"""with open('beads.out', 'w') as Fout:
+for i in range(len(flatnecklace)): 
+    firstcolor = None
+    secondcolor = None
+    currentmax = 0
+    for j in range(i, len(flatnecklace)):
+        if flatnecklace[j] == 'w':
+            currentmax += 1
+        else:
+            # break out the inner loop when we got the 3rd color
+            if secondcolor != None and secondcolor != flatnecklace[j]:
+                break
+            # We're collecting 1st and/or 2nd color beads
+            if firstcolor == None: 
+                firstcolor = flatnecklace[j]
+                currentmax += 1
+            else:
+                if firstcolor == flatnecklace[j]:
+                    currentmax += 1
+                else:
+                    secondcolor = flatnecklace[j]
+                    currentmax += 1
     
-    Fout.write(str() + ' ')
-    Fout.write(str() + '\n')""" 
+    maxResult = max(currentmax, maxResult)
+
+#print(maxResult)
+
+with open('beads.out', 'w') as Fout:
+    Fout.write(str(maxResult) + '\n')
