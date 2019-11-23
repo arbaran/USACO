@@ -36,8 +36,11 @@ for i in range(len(flatnecklace)):
                     currentmax += 1
                 else:
                     secondcolor = flatnecklace[j]
-                    currentmax += 1
+                    currentmax += 1 
     
+    if currentmax == len(necklace):
+        maxResult = currentmax 
+        break 
     maxResult = max(currentmax, maxResult)
 
 #print(maxResult)
